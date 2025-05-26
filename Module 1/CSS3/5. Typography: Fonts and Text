@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Portal - Typography</title>
+
+  <!-- Google Font Import using <link> -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1 class="main-title">Welcome to the Event Portal</h1>
+    <p class="subtitle">Connecting Communities Through Events</p>
+  </header>
+
+  <section class="description-section">
+    <p class="description">
+      Join us in celebrating our vibrant community with engaging events designed for everyone. Stay informed, stay connected, and never miss out on what’s happening near you.
+    </p>
+  </section>
+
+</body>
+</html>
+/* =============================
+   Typography Styles
+   ============================= */
+
+/* Set font globally */
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Title with serif font and styling */
+.main-title {
+  font-family: 'Merriweather', serif;
+  font-size: 36px;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+/* Subtitle with Open Sans */
+.subtitle {
+  font-size: 18px;
+  text-align: center;
+  color: #555;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+/* Paragraph with readability settings */
+.description {
+  font-size: 16px;
+  text-align: justify;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: auto;
+  color: #444;
+}
