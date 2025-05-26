@@ -1,0 +1,90 @@
+const events = [
+  { id: 1, name: "Music Festival", category: "Music", date: "2025-09-10", seats: 20 },
+  { id: 2, name: "Baking Workshop", category: "Workshop", date: "2025-07-22", seats: 5 },
+  { id: 3, name: "Jazz Night", category: "Music", date: "2025-08-05", seats: 0 },
+  { id: 4, name: "Art Exhibition", category: "Art", date: "2025-10-01", seats: 10 },
+];
+
+const eventsContainer = document.querySelector("#eventsContainer");
+const categoryFilter = document.querySelector("#categoryFilter");
+const searchInput = document.querySelector("#searchInput");
+
+let filteredEvents = [...events];
+
+
+function renderEvents() {
+  eventsContainer.innerHTML = "";
+
+  if (filteredEvents.length === 0) {
+    eventsContainer.textContent = "No events found.";
+    return;
+  }
+
+  filteredEvents.forEach(event => {
+    const card = document.createElement("div");
+    card.className = "eventCard";
+
+    const name = document.createElement("h3");
+    name.textContent = event.name;
+    card.appendChild(name);
+
+    const category = document.createElement("p");
+    category.textContent = `Category: ${event.category}`;
+    card.appendChild(category);
+
+    const date = document.createElement("p");
+    date.textContent = `Date: ${event.date}`;
+    card.appendChild(date);
+
+    const seats = document.createElement("p");
+    seats.textContent = `Seats Available: ${event.seats}`;
+    card.appendChild(seats);
+
+    const registerBtn = document.createElement("button");
+    registerBtn.textContent = "Register";
+    registerBtn.disabled = event.seats === 0;
+    registerBtn.onclick = () => registerUser(event.id);
+    card.appendChild(registerBtn);
+
+    eventsContainer.appendChild(card);
+  });
+}
+
+
+function registerUser(eventId) {
+  const event = events.find(e => e.id === eventId);
+  if (event.seats > 0) {
+    event.seats--;
+    alert(`Registered for ${event.name}. Seats left: ${event.seats}`);
+    applyFilters(); // refresh filtered list & UI
+  } else {
+    alert("Sorry, no seats available.");
+  }
+}
+
+categoryFilter.onchange = () => {
+  applyFilters();
+};
+
+
+searchInput.onkeydown = (e) => {
+
+  setTimeout(() => applyFilters(), 300);
+};
+
+
+function applyFilters() {
+  const category = categoryFilter.value.toLowerCase();
+  const searchText = searchInput.value.toLowerCase();
+
+  filteredEvents = events.filter(event => {
+    const matchesCategory = category === "all" || event.category.toLowerCase() === category;
+    const matchesSearch = event.name.toLowerCase().includes(searchText);
+    return matchesCategory && matchesSearch;
+  });
+
+  renderEvents();
+}
+
+
+renderEvents();
