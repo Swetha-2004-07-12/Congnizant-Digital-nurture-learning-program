@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>City Event Portal</title>
+
+  <!-- Google Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1 class="main-header">City Council Event Portal</h1>
+  </header>
+
+  <section class="intro">
+    <h2 class="section-title">Upcoming Events</h2>
+    <p class="description">
+      Explore upcoming community activities organized by your city council. Stay involved, stay informed.
+    </p>
+  </section>
+
+  <section class="highlights">
+    <h2 class="section-title">Event Highlights</h2>
+    <p class="description">
+      A look back at some of our most memorable gatherings.
+    </p>
+  </section>
+
+</body>
+</html>
+css style
+/* Reset & Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body with background image and fallback color */
+body {
+  background-color: #e0f7fa; /* Fallback color */
+  background-image: url('background-city.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Roboto', sans-serif;
+  color: #222;
+  padding: 20px;
+}
+
+/* Header Section */
+.main-header {
+  text-align: center;
+  color: #004d40; /* HEX */
+  background-color: rgba(255, 255, 255, 0.8); /* RGBA */
+  padding: 20px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Gradient for Section Headers */
+.section-title {
+  font-size: 24px;
+  padding: 10px;
+  color: white;
+  background: linear-gradient(to right, #00796b, #004d40);
+  margin: 20px 0 10px;
+}
+
+/* Description Text */
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  text-align: justify;
+  text-transform: none;
+  margin-bottom: 30px;
+}
