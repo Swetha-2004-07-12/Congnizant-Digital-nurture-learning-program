@@ -1,0 +1,75 @@
+const form = document.getElementById("registrationForm");
+const successMessage = document.getElementById("successMessage");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent form submission
+
+  // Clear messages and errors
+  successMessage.textContent = "";
+  clearErrors();
+
+  const { name, email, event: selectedEvent } = form.elements;
+
+  let valid = true;
+  if (!name.value.trim()) {
+    showError("nameError", "Name is required");
+    valid = false;
+  }
+  if (!email.value.trim() || !validateEmail(email.value)) {
+    showError("emailError", "Valid email required");
+    valid = false;
+  }
+  if (!selectedEvent.value) {
+    showError("eventError", "Please select an event");
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  // Prepare data to send
+  const userData = {
+    name: name.value.trim(),
+    email: email.value.trim(),
+    event: selectedEvent.value,
+  };
+
+  // Show loading message
+  successMessage.style.color = "black";
+  successMessage.textContent = "Sending registration...";
+
+  // Simulate network delay with setTimeout inside fetch call
+  setTimeout(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts", { // Mock API endpoint
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    })
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(data => {
+        successMessage.style.color = "green";
+        successMessage.textContent = "Registration successful! Thank you.";
+        form.reset();
+      })
+      .catch(error => {
+        successMessage.style.color = "red";
+        successMessage.textContent = "Failed to submit registration. Please try again.";
+        console.error("Error:", error);
+      });
+  }, 2000); // 2-second delay to simulate server processing
+});
+
+// Helpers (reuse from previous example)
+function showError(id, message) {
+  document.getElementById(id).textContent = message;
+}
+
+function clearErrors() {
+  document.querySelectorAll(".error").forEach(span => (span.textContent = ""));
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
