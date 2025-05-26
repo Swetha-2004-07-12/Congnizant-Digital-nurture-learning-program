@@ -1,0 +1,16 @@
+
+const eventName = "Community Cleanup";
+const eventDate = "2025-06-15";
+let availableSeats = 50;
+
+
+const eventInfo = `Event: ${eventName}, Date: ${eventDate}, Seats Available: ${availableSeats}`;
+console.log(eventInfo);
+
+
+availableSeats--;
+console.log(`After one registration, seats left: ${availableSeats}`);
+
+
+availableSeats++;
+console.log(`After one cancellation, seats left: ${availableSeats}`);
