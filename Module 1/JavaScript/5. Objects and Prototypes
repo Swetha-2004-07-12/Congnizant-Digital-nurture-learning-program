@@ -1,0 +1,33 @@
+
+function Event(name, date, seats, category) {
+  this.name = name;
+  this.date = new Date(date);
+  this.seats = seats;
+  this.category = category;
+}
+
+
+Event.prototype.checkAvailability = function() {
+  const now = new Date();
+  if (this.date < now) {
+    return "Event has passed";
+  }
+  if (this.seats > 0) {
+    return `Seats available: ${this.seats}`;
+  } else {
+    return "No seats available";
+  }
+};
+
+
+const cleanup = new Event("Community Cleanup", "2025-06-15", 10, "Environment");
+const bbq = new Event("Neighborhood BBQ", "2025-08-20", 0, "Social");
+
+console.log(cleanup.checkAvailability()); // Seats available: 10
+console.log(bbq.checkAvailability());     // No seats available
+
+
+console.log("Event properties and values:");
+Object.entries(cleanup).forEach(([key, value]) => {
+  console.log(`${key}: ${value}`);
+});
