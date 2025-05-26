@@ -1,0 +1,84 @@
+<form id="registrationForm" novalidate>
+  <label>
+    Name:
+    <input type="text" name="name" placeholder="Your name" required />
+    <span class="error" id="nameError"></span>
+  </label><br/><br/>
+
+  <label>
+    Email:
+    <input type="email" name="email" placeholder="you@example.com" required />
+    <span class="error" id="emailError"></span>
+  </label><br/><br/>
+
+  <label>
+    Select Event:
+    <select name="event" required>
+      <option value="">--Choose an event--</option>
+      <option value="music">Music Festival</option>
+      <option value="art">Art Workshop</option>
+      <option value="sports">Sports Meet</option>
+    </select>
+    <span class="error" id="eventError"></span>
+  </label><br/><br/>
+
+  <button type="submit">Register</button>
+</form>
+
+<div id="successMessage" style="color: green; margin-top: 10px;"></div>
+const form = document.getElementById("registrationForm");
+const successMessage = document.getElementById("successMessage");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent page reload
+
+  // Clear previous messages
+  successMessage.textContent = "";
+  clearErrors();
+
+  // Get form elements
+  const { name, email, event: selectedEvent } = form.elements;
+
+  let valid = true;
+
+  // Simple validation
+  if (!name.value.trim()) {
+    showError("nameError", "Name is required");
+    valid = false;
+  }
+
+  if (!email.value.trim()) {
+    showError("emailError", "Email is required");
+    valid = false;
+  } else if (!validateEmail(email.value)) {
+    showError("emailError", "Invalid email format");
+    valid = false;
+  }
+
+  if (!selectedEvent.value) {
+    showError("eventError", "Please select an event");
+    valid = false;
+  }
+
+  if (valid) {
+    successMessage.textContent = `Thanks for registering, ${name.value}!`;
+    form.reset();
+  }
+});
+
+// Helper to show error message
+function showError(id, message) {
+  const errorSpan = document.getElementById(id);
+  errorSpan.textContent = message;
+}
+
+// Clear all error messages
+function clearErrors() {
+  document.querySelectorAll(".error").forEach(span => (span.textContent = ""));
+}
+
+// Simple email format check
+function validateEmail(email) {
+  // Basic regex for email validation
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
