@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Community Portal - JS Setup</title>
+</head>
+<body>
+
+  <h1>Community Portal</h1>
+  <p>Welcome to the community event portal.</p>
+
+  
+  <script src="main.js"></script>
+</body>
+</html>
+
+console.log("Welcome to the Community Portal");
+
+
+window.onload = function() {
+  alert("Page is fully loaded. Welcome!");
+};
