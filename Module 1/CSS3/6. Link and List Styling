@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Links and Lists</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section>
+    <h2>Event Categories</h2>
+    <ul class="styled-list">
+      <li>Community Meetups</li>
+      <li>Workshops</li>
+      <li>Outdoor Festivals</li>
+      <li>Charity Drives</li>
+    </ul>
+  </section>
+
+</body>
+</html>
+/* =============================
+   Link Styling
+   ============================= */
+
+a:link {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #663399;
+}
+
+a:hover {
+  color: #ff6600;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #cc0000;
+}
+
+/* =============================
+   List Styling
+   ============================= */
+
+/* Remove bullets from nav menu and add spacing */
+.nav-menu {
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu li {
+  padding: 10px;
+  margin: 5px;
+}
+
+/* Styled bullet list */
+.styled-list {
+  list-style-type: square;
+  list-style-position: outside;
+  margin-left: 20px;
+}
+
+.styled-list li {
+  padding: 8px 0;
+  margin: 4px 0;
+}
