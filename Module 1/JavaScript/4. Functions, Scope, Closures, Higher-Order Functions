@@ -1,0 +1,67 @@
+
+const events = [];
+
+function addEvent(name, date, seats, category) {
+  events.push({ name, date, seats, category });
+  console.log(`Event "${name}" added.`);
+}
+
+
+function registerUser(eventName) {
+  const event = events.find(e => e.name === eventName);
+  if (!event) {
+    console.error("Event not found");
+    return false;
+  }
+  if (new Date(event.date) < new Date()) {
+    console.error("Cannot register for past events");
+    return false;
+  }
+  if (event.seats <= 0) {
+    console.error("No seats available");
+    return false;
+  }
+  event.seats--;
+  console.log(`User registered for ${eventName}. Seats left: ${event.seats}`);
+  return true;
+}
+
+
+function registrationTracker() {
+  const counts = {}; // private object to store counts
+
+  return {
+    increment: function(category) {
+      counts[category] = (counts[category] || 0) + 1;
+      console.log(`Total registrations for "${category}": ${counts[category]}`);
+    },
+    getCount: function(category) {
+      return counts[category] || 0;
+    }
+  };
+}
+
+const tracker = registrationTracker();
+
+// Higher-order function to filter events by category (callback)
+function filterEventsByCategory(category, callback) {
+  const filtered = events.filter(event => event.category === category);
+  callback(filtered);
+}
+
+
+
+addEvent("Community Cleanup", "2025-06-15", 10, "Environment");
+addEvent("Neighborhood BBQ", "2025-08-20", 25, "Social");
+addEvent("Charity Run", "2025-07-10", 5, "Health");
+
+
+if (registerUser("Community Cleanup")) {
+  tracker.increment("Environment");
+}
+
+
+filterEventsByCategory("Social", filteredEvents => {
+  console.log("Social events:");
+  filteredEvents.forEach(e => console.log(`- ${e.name} on ${e.date}`));
+});
