@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Selectors Playground</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ID selector applied -->
+  <div id="mainHeader">
+    <h1>Welcome to the Event Portal</h1>
+  </div>
+
+  <!-- Element selector applied -->
+  <h2>Upcoming Events</h2>
+  <h2>Past Highlights</h2>
+  <h2>Contact Information</h2>
+
+  <p>This page demonstrates different CSS selector types.</p>
+
+</body>
+</html>
+CSS style
+/* Universal selector to reset default spacing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ID selector for the banner */
+#mainHeader {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Element selector to style all h2 elements */
+h2 {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  margin: 20px 0 10px 0;
+  padding-left: 10px;
+  border-left: 4px solid #4CAF50;
+}
