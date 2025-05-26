@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Registration with jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .event-card {
+      display: none;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin: 10px;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="registerBtn">Show Event</button>
+
+  <div id="eventCard" class="event-card">
+    <h3>Community Clean-Up Drive</h3>
+    <p>Join us to make our neighborhood cleaner and greener!</p>
+    <button id="hideCard">Hide</button>
+  </div>
+
+  <script>
+    // jQuery to handle click
+    $('#registerBtn').click(function () {
+      $('#eventCard').fadeIn(); // show the event card with fadeIn
+    });
+
+    $('#hideCard').click(function () {
+      $('#eventCard').fadeOut(); // hide the event card with fadeOut
+    });
+  </script>
+
+</body>
+</html>
