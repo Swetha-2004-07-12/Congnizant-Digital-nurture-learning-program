@@ -1,0 +1,45 @@
+
+const events = [
+  { name: "Community Cleanup", date: "2025-06-15", seats: 10 },
+  { name: "Neighborhood BBQ", date: "2024-11-01", seats: 0 },  // full event
+  { name: "Charity Run", date: "2025-05-10", seats: 5 },
+  { name: "Art Workshop", date: "2023-12-20", seats: 8 }      // past event
+];
+
+
+function isUpcoming(eventDate) {
+  const today = new Date();
+  const eventDay = new Date(eventDate);
+  return eventDay >= today;
+}
+
+
+console.log("Upcoming events with available seats:");
+
+events.forEach(event => {
+  if (isUpcoming(event.date) && event.seats > 0) {
+    console.log(`- ${event.name} on ${event.date}, Seats available: ${event.seats}`);
+  }
+});
+
+
+function register(eventName) {
+  try {
+    const event = events.find(e => e.name === eventName);
+    if (!event) throw new Error("Event not found");
+    if (!isUpcoming(event.date)) throw new Error("Event has already passed");
+    if (event.seats <= 0) throw new Error("No seats available");
+
+    // Register by decrementing seats
+    event.seats--;
+    console.log(`Successfully registered for ${eventName}. Seats left: ${event.seats}`);
+  } catch (error) {
+    console.error(`Registration failed: ${error.message}`);
+  }
+}
+
+
+register("Community Cleanup");  // valid
+register("Neighborhood BBQ");   // full event
+register("Art Workshop");       // past event
+register("Nonexistent Event");  // invalid event
