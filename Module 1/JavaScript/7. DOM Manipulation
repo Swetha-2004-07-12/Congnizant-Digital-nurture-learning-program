@@ -1,0 +1,74 @@
+
+const events = [
+  { id: 1, name: "Music Festival", date: "2025-09-10", seats: 20 },
+  { id: 2, name: "Baking Workshop", date: "2025-07-22", seats: 5 },
+  { id: 3, name: "Jazz Night", date: "2025-08-05", seats: 0 },
+];
+
+
+const eventsContainer = document.querySelector("#eventsContainer");
+
+
+function renderEvents() {
+ 
+  eventsContainer.innerHTML = "";
+
+  events.forEach(event => {
+
+    const card = document.createElement("div");
+    card.className = "eventCard";
+
+
+    const name = document.createElement("h3");
+    name.textContent = event.name;
+    card.appendChild(name);
+
+
+    const date = document.createElement("p");
+    date.textContent = `Date: ${event.date}`;
+    card.appendChild(date);
+
+ 
+    const seats = document.createElement("p");
+    seats.textContent = `Seats Available: ${event.seats}`;
+    card.appendChild(seats);
+
+   
+    const registerBtn = document.createElement("button");
+    registerBtn.textContent = "Register";
+    registerBtn.disabled = event.seats === 0; // disable if no seats
+    registerBtn.addEventListener("click", () => registerUser(event.id));
+    card.appendChild(registerBtn);
+
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.textContent = "Cancel Registration";
+    cancelBtn.addEventListener("click", () => cancelRegistration(event.id));
+    card.appendChild(cancelBtn);
+
+    eventsContainer.appendChild(card);
+  });
+}
+
+
+function registerUser(eventId) {
+  const event = events.find(e => e.id === eventId);
+  if (event.seats > 0) {
+    event.seats--;
+    alert(`Registered for ${event.name}. Seats left: ${event.seats}`);
+    renderEvents(); // update UI
+  } else {
+    alert("Sorry, no seats available.");
+  }
+}
+
+
+function cancelRegistration(eventId) {
+  const event = events.find(e => e.id === eventId);
+  event.seats++;
+  alert(`Registration canceled for ${event.name}. Seats available: ${event.seats}`);
+  renderEvents(); // update UI
+}
+
+
+renderEvents();
