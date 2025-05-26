@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Styling Methods</title>
+
+  <!-- Internal CSS -->
+  <style>
+    /* Body styles */
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+  </style>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Inline CSS applied here -->
+  <h1 style="color: red;">This heading uses Inline CSS</h1>
+
+  <!-- Styled by External CSS -->
+  <h2 class="main-heading">This heading uses External CSS</h2>
+
+  <p class="content">
+    This paragraph also uses External CSS styling.
+  </p>
+
+</body>
+</html>
+/* Header styles */
+css 
+.main-heading {
+  color: navy;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Paragraph styles */
+.content {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
