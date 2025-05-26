@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Bulletin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <section class="news-article">
+    <h2>Community Bulletin</h2>
+    <p>
+      This weekend, the annual Spring Festival will be held at the town center. Residents are invited to join the celebrations, which include live music, a farmer’s market, food trucks, and kids’ games. Local artists will also showcase their work.
+    </p>
+    <p>
+      Volunteers are still needed for setup, cleanup, and guiding guests. You can sign up at the community office or via the event portal. All participants will receive a free T-shirt and lunch vouchers. We look forward to seeing everyone there!
+    </p>
+  </section>
+
+</body>
+</html>
+/* =============================
+   Newspaper-Style Columns
+   ============================= */
+
+.news-article {
+  width: 80%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff8dc;
+  font-family: Georgia, serif;
+  column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid gray;
+}
+
+.news-article h2 {
+  column-span: all;
+  text-align: center;
+  margin-bottom: 20px;
+}
