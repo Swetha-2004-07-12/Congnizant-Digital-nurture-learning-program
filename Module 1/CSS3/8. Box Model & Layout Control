@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Box Model & Layout</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <section class="eventCard">
+    <h2>Music in the Park</h2>
+    <p>Enjoy live performances every weekend in Central Park.</p>
+  </section>
+
+  <form class="eventForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" class="formField">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" class="formField selected">
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div class="box hidden-box">This box uses visibility: hidden</div>
+  <div class="box none-box">This box uses display: none</div>
+
+</body>
+</html>
+/* =============================
+   Box Model for .eventCard
+   ============================= */
+
+.eventCard {
+  border: 2px solid #007BFF;
+  padding: 20px;
+  margin: 30px;
+  background-color: #f0f8ff;
+  width: 300px;
+  border-radius: 8px;
+}
+
+/* =============================
+   Form Field Outline
+   ============================= */
+
+.formField {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+}
+
+.selected {
+  outline: 3px solid orange;
+}
+
+/* =============================
+   Visibility vs. Display
+   ============================= */
+
+.box {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #e0e0e0;
+}
+
+.hidden-box {
+  visibility: hidden; /* takes up space, but not visible */
+}
+
+.none-box {
+  display: none; /* removed from layout flow */
+}
