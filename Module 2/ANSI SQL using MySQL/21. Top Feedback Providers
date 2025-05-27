@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Top Feedback Providers</title>
+<style>body{font-family:Arial,sans-serif;padding:20px;} ol{padding-left:20px;} li{margin:6px 0;}</style>
+</head>
+<body>
+
+<h2>Top 5 Feedback Providers</h2>
+<ol id="top-feedback"></ol>
+
+<script>
+const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 3, name: "Charlie" },
+  { id: 4, name: "David" }
+];
+
+const feedbacks = [
+  { userId: 1, eventId: 1 },
+  { userId: 1, eventId: 2 },
+  { userId: 2, eventId: 1 },
+  { userId: 2, eventId: 3 },
+  { userId: 2, eventId: 2 },
+  { userId: 3, eventId: 2 },
+  { userId: 4, eventId: 3 },
+  { userId: 1, eventId: 3 }
+];
+
+// Count feedbacks per user
+const feedbackCounts = {};
+feedbacks.forEach(f => {
+  feedbackCounts[f.userId] = (feedbackCounts[f.userId] || 0) + 1;
+});
+
+const topUsers = users
+  .map(u => ({ name: u.name, count: feedbackCounts[u.id] || 0 }))
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 5);
+
+const ol = document.getElementById('top-feedback');
+topUsers.forEach(u => {
+  const li = document.createElement('li');
+  li.textContent = `${u.name} — ${u.count} feedback(s)`;
+  ol.appendChild(li);
+});
+</script>
+
+</body>
+</html>
