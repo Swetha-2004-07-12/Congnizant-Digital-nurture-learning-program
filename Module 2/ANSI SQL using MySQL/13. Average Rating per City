@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Average Rating per City</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background-color: #1976d2; color: white; }
+  </style>
+</head>
+<body>
+
+  <h2>Average Feedback Rating per City</h2>
+  <table>
+    <thead>
+      <tr><th>City</th><th>Average Rating</th></tr>
+    </thead>
+    <tbody id="avg-rating-city"></tbody>
+  </table>
+
+  <script>
+    // Events with city
+    const events = [
+      { id: 1, name: "Tech Expo", city: "New York" },
+      { id: 2, name: "Startup Summit", city: "San Francisco" },
+      { id: 3, name: "Food Carnival", city: "New York" },
+      { id: 4, name: "Art Expo", city: "San Francisco" },
+      { id: 5, name: "Music Fest", city: "Chicago" }
+    ];
+
+    // Feedbacks with event ID and rating
+    const feedbacks = [
+      { eventId: 1, rating: 4 },
+      { eventId: 1, rating: 5 },
+      { eventId: 2, rating: 3 },
+      { eventId: 3, rating: 2 },
+      { eventId: 3, rating: 3 },
+      { eventId: 4, rating: 4 },
+      { eventId: 4, rating: 4 },
+      { eventId: 5, rating: 5 }
+    ];
+
+    // Map city => { totalRating, count }
+    const cityRatings = {};
+
+    feedbacks.forEach(fb => {
+      const event = events.find(e => e.id === fb.eventId);
+      if (event) {
+        if (!cityRatings[event.city]) cityRatings[event.city] = { total: 0, count: 0 };
+        cityRatings[event.city].total += fb.rating;
+        cityRatings[event.city].count++;
+      }
+    });
+
+    const tbody = document.getElementById("avg-rating-city");
+    Object.entries(cityRatings).forEach(([city, { total, count }]) => {
+      const avg = (total / count).toFixed(2);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${city}</td><td>${avg}</td>`;
+      tbody.appendChild(tr);
+    });
+  </script>
+
+</body>
+</html>
