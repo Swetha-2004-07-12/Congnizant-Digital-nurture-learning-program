@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bootstrap Dashboard - Contextual Backgrounds</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="container my-5">
+
+    <h1 class="mb-4">Dashboard Overview</h1>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="p-4 bg-primary text-white rounded shadow-sm">
+          <h3 class="fw-bold">Users</h3>
+          <p class="fs-4">1,245</p>
+          <p>Active users this month</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 bg-success text-white rounded shadow-sm">
+          <h3 class="fw-bold">Sales</h3>
+          <p class="fs-4">$23,567</p>
+          <p>Completed transactions</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 bg-warning text-dark rounded shadow-sm">
+          <h3 class="fw-bold">Pending Orders</h3>
+          <p class="fs-4">58</p>
+          <p>Awaiting fulfillment</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 bg-danger text-white rounded shadow-sm">
+          <h3 class="fw-bold">Errors</h3>
+          <p class="fs-4">7</p>
+          <p>Critical issues reported</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 bg-info text-white rounded shadow-sm">
+          <h3 class="fw-bold">Notifications</h3>
+          <p class="fs-4">12</p>
+          <p>Unread alerts</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 bg-secondary text-white rounded shadow-sm">
+          <h3 class="fw-bold">Server Load</h3>
+          <p class="fs-4">75%</p>
+          <p>Current usage</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
