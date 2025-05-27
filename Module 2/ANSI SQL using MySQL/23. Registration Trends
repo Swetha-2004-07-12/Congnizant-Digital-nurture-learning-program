@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Registration Trends (Last 12 Months)</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  table { border-collapse: collapse; width: 50%; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  th { background: #1565c0; color: white; }
+</style>
+</head>
+<body>
+
+<h2>Month-wise Registration Count (Last 12 Months)</h2>
+<table>
+<thead><tr><th>Month</th><th>Registrations</th></tr></thead>
+<tbody id="trend-body"></tbody>
+</table>
+
+<script>
+const registrations = [
+  { userId: 1, eventId: 1, date: "2024-06-15" },
+  { userId: 2, eventId: 2, date: "2024-07-05" },
+  { userId: 3, eventId: 2, date: "2024-07-20" },
+  { userId: 4, eventId: 3, date: "2024-08-02" },
+  { userId: 5, eventId: 1, date: "2024-11-10" },
+  { userId: 6, eventId: 3, date: "2025-01-25" },
+  { userId: 7, eventId: 1, date: "2025-03-15" },
+  { userId: 8, eventId: 2, date: "2025-05-05" }
+];
+
+// Get last 12 months labels as YYYY-MM, starting from current month backwards
+const now = new Date("2025-05-27");
+const months = [];
+for(let i = 11; i >= 0; i--){
+  const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+  const m = d.toLocaleString('default', { month: 'short' });
+  const y = d.getFullYear();
+  months.push({ label: `${m} ${y}`, key: `${y}-${String(d.get
