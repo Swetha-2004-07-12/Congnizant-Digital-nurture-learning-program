@@ -1,0 +1,48 @@
+// File: TransactionExample.java
+import java.sql.*;
+
+public class TransactionExample {
+    public static void transferMoney(Connection conn, int fromAccount, int toAccount, double amount) throws SQLException {
+        try {
+            conn.setAutoCommit(false);
+
+            // Debit fromAccount
+            String debitSQL = "UPDATE accounts SET balance = balance - ? WHERE id = ?";
+            try (PreparedStatement debitStmt = conn.prepareStatement(debitSQL)) {
+                debitStmt.setDouble(1, amount);
+                debitStmt.setInt(2, fromAccount);
+                debitStmt.executeUpdate();
+            }
+
+            // Credit toAccount
+            String creditSQL = "UPDATE accounts SET balance = balance + ? WHERE id = ?";
+            try (PreparedStatement creditStmt = conn.prepareStatement(creditSQL)) {
+                creditStmt.setDouble(1, amount);
+                creditStmt.setInt(2, toAccount);
+                creditStmt.executeUpdate();
+            }
+
+            conn.commit();
+            System.out.println("Transfer successful.");
+
+        } catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Transfer failed. Transaction rolled back.");
+            throw e;
+        } finally {
+            conn.setAutoCommit(true);
+        }
+    }
+
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/bank";
+        String user = "root";
+        String password = "your_password";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            transferMoney(conn, 1, 2, 100.0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
