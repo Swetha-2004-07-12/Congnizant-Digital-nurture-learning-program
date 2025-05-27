@@ -1,0 +1,36 @@
+// File: ThreadDemo.java
+
+class MessageThread extends Thread {
+    private String message;
+    private int times;
+
+    public MessageThread(String message, int times) {
+        this.message = message;
+        this.times = times;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < times; i++) {
+            System.out.println(Thread.currentThread().getName() + ": " + message);
+            try {
+                Thread.sleep(500); // Sleep for 500 ms for readability
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class ThreadDemo {
+    public static void main(String[] args) {
+        MessageThread thread1 = new MessageThread("Hello from Thread 1", 5);
+        MessageThread thread2 = new MessageThread("Hello from Thread 2", 5);
+
+        thread1.setName("Thread-1");
+        thread2.setName("Thread-2");
+
+        thread1.start();
+        thread2.start();
+    }
+}
