@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sessions per Upcoming Event</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #e8f0fe; }
+    .event-card {
+      background: #fff;
+      border-left: 6px solid #1a73e8;
+      padding: 12px;
+      margin: 8px 0;
+    }
+    .event-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Sessions per Upcoming Event</h2>
+  <div id="sessions-list"></div>
+
+  <script>
+    const today = new Date();
+
+    const events = [
+      { name: "Tech Expo", date: "2025-06-10", sessions: ["10:00", "11:30", "14:00"] },
+      { name: "Startup Summit", date: "2025-05-20", sessions: ["09:00", "13:00"] },
+      { name: "Food Carnival", date: "2025-07-05", sessions: ["10:00", "15:00", "17:00"] },
+      { name: "Art Expo", date: "2025-05-10", sessions: ["11:00"] }
+    ];
+
+    const upcomingEvents = events.filter(event => new Date(event.date) >= today);
+    const container = document.getElementById("sessions-list");
+
+    if (upcomingEvents.length === 0) {
+      container.innerHTML = "<p>No upcoming events found.</p>";
+    } else {
+      upcomingEvents.forEach(event => {
+        const div = document.createElement("div");
+        div.className = "event-card";
+        div.innerHTML = `
+          <div class="event-name">${event.name}</div>
+          <div>Event Date: ${new Date(event.date).toDateString()}</div>
+          <div>Number of Sessions: ${event.sessions.length}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+
+</body>
+</html>
