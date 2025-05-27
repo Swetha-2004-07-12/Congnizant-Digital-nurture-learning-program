@@ -1,52 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Low Feedback Alerts</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #fff8f8; }
-    .alert-card {
-      background: #ffe6e6;
-      border-left: 6px solid #e53935;
-      margin: 10px 0;
-      padding: 12px;
-    }
-    .event-name { font-weight: bold; color: #c62828; }
-  </style>
-</head>
-<body>
-
-  <h2>Low Feedback Alerts (Rating &lt; 3)</h2>
-  <div id="low-feedback-list"></div>
-
-  <script>
-    const feedbacks = [
-      { user: "Alice", rating: 2, comment: "Sound quality was poor.", event: "Tech Expo" },
-      { user: "Bob", rating: 4, comment: "Great sessions!", event: "Startup Summit" },
-      { user: "Charlie", rating: 1, comment: "Not well organized.", event: "Food Carnival" },
-      { user: "David", rating: 3, comment: "Average experience.", event: "Tech Expo" },
-      { user: "Eva", rating: 2.5, comment: "Venue was too crowded.", event: "Art Expo" }
-    ];
-
-    const lowFeedbacks = feedbacks.filter(fb => fb.rating < 3);
-    const container = document.getElementById("low-feedback-list");
-
-    if (lowFeedbacks.length === 0) {
-      container.innerHTML = "<p>No low feedback found.</p>";
-    } else {
-      lowFeedbacks.forEach(fb => {
-        const div = document.createElement("div");
-        div.className = "alert-card";
-        div.innerHTML = `
-          <div><strong>User:</strong> ${fb.user}</div>
-          <div><strong>Event:</strong> <span class="event-name">${fb.event}</span></div>
-          <div><strong>Rating:</strong> ${fb.rating}</div>
-          <div><strong>Comment:</strong> ${fb.comment}</div>
-        `;
-        container.appendChild(div);
-      });
-    }
-  </script>
-
-</body>
-</html>
+SELECT u.full_name, e.title, f.rating, f.comments
+FROM Feedback f
+JOIN Users u ON f.user_id = u.user_id
+JOIN Events e ON f.event_id = e.event_id
+WHERE f.rating < 3;
