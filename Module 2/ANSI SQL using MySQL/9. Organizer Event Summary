@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Organizer Event Summary</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f7; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background-color: #1976d2; color: white; }
+  </style>
+</head>
+<body>
+
+  <h2>Organizer Event Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Organizer</th>
+        <th>Upcoming Events</th>
+        <th>Completed Events</th>
+        <th>Cancelled Events</th>
+        <th>Total Events</th>
+      </tr>
+    </thead>
+    <tbody id="summary-body"></tbody>
+  </table>
+
+  <script>
+    const events = [
+      { name: "Tech Expo", organizer: "Alice", status: "upcoming" },
+      { name: "Startup Summit", organizer: "Bob", status: "completed" },
+      { name: "Food Carnival", organizer: "Alice", status: "cancelled" },
+      { name: "Art Expo", organizer: "Charlie", status: "upcoming" },
+      { name: "Music Fest", organizer: "Bob", status: "completed" },
+      { name: "Book Fair", organizer: "Alice", status: "completed" },
+      { name: "Gaming Con", organizer: "Charlie", status: "cancelled" }
+    ];
+
+    // Organize data by organizer
+    const organizerMap = {};
+
+    events.forEach(({ organizer, status }) => {
+      if (!organizerMap[organizer]) {
+        organizerMap[organizer] = { upcoming: 0, completed: 0, cancelled: 0 };
+      }
+      if (status === "upcoming") organizerMap[organizer].upcoming++;
+      else if (status === "completed") organizerMap[organizer].completed++;
+      else if (status === "cancelled") organizerMap[organizer].cancelled++;
+    });
+
+    const tbody = document.getElementById("summary-body");
+
+    Object.entries(organizerMap).forEach(([organizer, counts]) => {
+      const total = counts.upcoming + counts.completed + counts.cancelled;
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${organizer}</td>
+        <td>${counts.upcoming}</td>
+        <td>${counts.completed}</td>
+        <td>${counts.cancelled}</td>
+        <td>${total}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  </script>
+
+</body>
+</html>
