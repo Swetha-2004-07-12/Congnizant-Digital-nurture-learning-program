@@ -1,49 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<title>User Engagement Index</title>
-<style>body{font-family:Arial,sans-serif;padding:20px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ccc;padding:8px;text-align:left;} th{background:#0288d1;color:#fff;}</style>
-</head>
-<body>
-
-<h2>User Engagement Index</h2>
-<table>
-<thead><tr><th>User</th><th>Events Attended</th><th>Feedbacks Submitted</th></tr></thead>
-<tbody id="engagement-body"></tbody>
-</table>
-
-<script>
-const users = [
-  { id: 1, name: "Alice" },
-  { id: 2, name: "Bob" },
-  { id: 3, name: "Charlie" }
-];
-
-const registrations = [
-  { userId: 1, eventId: 1 },
-  { userId: 1, eventId: 2 },
-  { userId: 2, eventId: 1 },
-  { userId: 3, eventId: 3 }
-];
-
-const feedbacks = [
-  { userId: 1, eventId: 1, rating: 4 },
-  { userId: 1, eventId: 2, rating: 5 },
-  { userId: 2, eventId: 1, rating: 3 }
-];
-
-const tbody = document.getElementById('engagement-body');
-
-users.forEach(user => {
-  const eventsAttended = new Set(registrations.filter(r => r.userId === user.id).map(r => r.eventId)).size;
-  const feedbackCount = feedbacks.filter(f => f.userId === user.id).length;
-  
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td>${user.name}</td><td>${eventsAttended}</td><td>${feedbackCount}</td>`;
-  tbody.appendChild(tr);
-});
-</script>
-
-</body>
-</html>
+SELECT u.full_name,
+       COUNT(DISTINCT r.event_id) AS total_events_attended,
+       COUNT(DISTINCT f.feedback_id) AS total_feedbacks
+FROM Users u
+LEFT JOIN Registrations r ON u.user_id = r.user_id
+LEFT JOIN Feedback f ON u.user_id = f.user_id
+GROUP BY u.user_id;
