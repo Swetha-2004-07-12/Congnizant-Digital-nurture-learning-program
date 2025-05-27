@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event with Maximum Sessions</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f7f6; }
+    .event-card {
+      background: #d1f5d3;
+      padding: 15px;
+      margin: 10px 0;
+      border-left: 6px solid #4caf50;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Event(s) with Maximum Sessions</h2>
+  <div id="max-session-events"></div>
+
+  <script>
+    const events = [
+      { name: "Tech Expo", sessions: ["09:00", "10:30", "14:00"] },
+      { name: "Startup Summit", sessions: ["09:00", "13:00", "15:00", "16:00"] },
+      { name: "Food Carnival", sessions: ["10:00"] },
+      { name: "Art Expo", sessions: ["11:00", "12:00", "13:00", "14:00"] }
+    ];
+
+    // Find max session count
+    let maxSessions = 0;
+    events.forEach(event => {
+      if(event.sessions.length > maxSessions) maxSessions = event.sessions.length;
+    });
+
+    // Get all events with max sessions
+    const maxSessionEvents = events.filter(e => e.sessions.length === maxSessions);
+
+    const container = document.getElementById("max-session-events");
+
+    maxSessionEvents.forEach(event => {
+      const div = document.createElement("div");
+      div.className = "event-card";
+      div.innerHTML = `
+        <strong>${event.name}</strong><br>
+        Number of Sessions: ${event.sessions.length}
+      `;
+      container.appendChild(div);
+    });
+  </script>
+
+</body>
+</html>
