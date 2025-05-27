@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap JS Example</title>
+  
+  <!-- Bootstrap CSS (local or CDN) -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h1 class="text-primary">Hello, Bootstrap!</h1>
+    <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#demo">Toggle Content</button>
+    <div id="demo" class="collapse mt-3">
+      This is a collapsible section using Bootstrap JavaScript plugin.
+    </div>
+  </div>
+
+  <!-- Bootstrap JavaScript Bundle with Popper (local or CDN) -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
