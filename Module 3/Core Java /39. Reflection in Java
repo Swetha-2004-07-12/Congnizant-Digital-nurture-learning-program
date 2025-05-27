@@ -1,0 +1,33 @@
+import java.lang.reflect.*;
+
+class Sample {
+    public void greet(String name) {
+        System.out.println("Hello, " + name);
+    }
+
+    private void secret() {
+        System.out.println("This is a private method.");
+    }
+}
+
+public class ReflectionExample {
+    public static void main(String[] args) {
+        try {
+            Class<?> clazz = Class.forName("Sample");
+            Object obj = clazz.getDeclaredConstructor().newInstance();
+
+            Method[] methods = clazz.getDeclaredMethods();
+            for (Method method : methods) {
+                System.out.println("Method: " + method.getName());
+                method.setAccessible(true); // For private methods
+                if (method.getParameterCount() == 1) {
+                    method.invoke(obj, "World");
+                } else {
+                    method.invoke(obj);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
