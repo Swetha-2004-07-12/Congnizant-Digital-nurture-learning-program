@@ -1,0 +1,31 @@
+// File: CarDemo.java
+
+class Car {
+    String make;
+    String model;
+    int year;
+
+    // Constructor
+    public Car(String make, String model, int year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    // Method to display details
+    public void displayDetails() {
+        System.out.println(year + " " + make + " " + model);
+    }
+}
+
+public class CarDemo {
+    public static void main(String[] args) {
+        // Creating Car objects
+        Car car1 = new Car("Toyota", "Camry", 2022);
+        Car car2 = new Car("Honda", "Civic", 2020);
+
+        // Calling displayDetails method
+        car1.displayDetails();
+        car2.displayDetails();
+    }
+}
