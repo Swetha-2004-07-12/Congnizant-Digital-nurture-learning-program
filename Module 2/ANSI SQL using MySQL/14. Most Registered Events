@@ -1,60 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Top 3 Most Registered Events</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #fff8e1; }
-    ol { padding-left: 20px; }
-    li { margin: 8px 0; }
-  </style>
-</head>
-<body>
-
-  <h2>Top 3 Most Registered Events</h2>
-  <ol id="top-events"></ol>
-
-  <script>
-    const events = [
-      { id: 1, name: "Tech Expo" },
-      { id: 2, name: "Startup Summit" },
-      { id: 3, name: "Food Carnival" },
-      { id: 4, name: "Art Expo" }
-    ];
-
-    const registrations = [
-      { userId: 1, eventId: 1 },
-      { userId: 2, eventId: 2 },
-      { userId: 3, eventId: 2 },
-      { userId: 4, eventId: 3 },
-      { userId: 5, eventId: 2 },
-      { userId: 6, eventId: 3 },
-      { userId: 7, eventId: 1 },
-      { userId: 8, eventId: 4 },
-      { userId: 9, eventId: 4 },
-      { userId: 10, eventId: 1 },
-      { userId: 11, eventId: 2 }
-    ];
-
-    // Count registrations per event
-    const regCounts = {};
-    registrations.forEach(r => {
-      regCounts[r.eventId] = (regCounts[r.eventId] || 0) + 1;
-    });
-
-    // Sort events by registration count desc
-    const sortedEvents = events
-      .map(e => ({ ...e, count: regCounts[e.id] || 0 }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 3);
-
-    const ol = document.getElementById("top-events");
-    sortedEvents.forEach(e => {
-      const li = document.createElement("li");
-      li.textContent = `${e.name} — ${e.count} registrations`;
-      ol.appendChild(li);
-    });
-  </script>
-
-</body>
-</html>
+SELECT e.title, COUNT(r.registration_id) AS total_registrations
+FROM Events e
+JOIN Registrations r ON e.event_id = r.event_id
+GROUP BY e.event_id
+ORDER BY total_registrations DESC
+LIMIT 3;
