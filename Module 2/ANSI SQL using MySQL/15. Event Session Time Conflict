@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Session Time Conflicts</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #fff3e0; }
+    .conflict { background: #ffccbc; padding: 10px; margin: 10px 0; border-left: 6px solid #d84315; }
+  </style>
+</head>
+<body>
+
+  <h2>Session Time Conflicts</h2>
+  <div id="conflicts"></div>
+
+  <script>
+    // Sample events with sessions (start and end times in HH:MM 24h format)
+    const events = [
+      {
+        name: "Tech Expo",
+        sessions: [
+          { id: 1, start: "09:00", end: "10:30" },
+          { id: 2, start: "10:15", end: "11:00" }, // Overlaps with session 1
+          { id: 3, start: "11:30", end: "12:30" }
+        ]
+      },
+      {
+        name: "Startup Summit",
+        sessions: [
+          { id: 1, start: "13:00", end: "14:00" },
+          { id: 2, start: "14:00", end: "15:00" } // No overlap, end time matches start time
+        ]
+      }
+    ];
+
+    function toMinutes(t) {
+      const [h, m] = t.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    const container = document.getElementById("conflicts");
+
+    events.forEach(event => {
+      const conflicts = [];
+      const sessions = event.sessions;
+
+      for (let i = 0; i < sessions.length; i++) {
+        for (let j = i + 1; j < sessions.length; j++) {
+          const s1Start = toMinutes(sessions[i].start);
+          const s1End = toMinutes(sessions[i].end);
+          const s2Start = toMinutes(sessions[j].start);
+          const s2End = toMinutes(sessions[j].end);
+
+          // Overlap if s1 starts before s2 ends and s2 starts before s1 ends
+          if (s1Start < s2End && s2Start < s1End) {
+            conflicts.push([sessions[i], sessions[j]]);
+          }
+        }
+      }
+
+      if (conflicts.length > 0) {
+        const div = document.createElement("div");
+        div.innerHTML = `<h3>${event.name}</h3>`;
+        conflicts.forEach(([s1, s2]) => {
+          const conflictDiv = document.createElement("div");
+          conflictDiv.className = "conflict";
+          conflictDiv.textContent = `Session ${s1.id} (${s1.start}-${s1.end}) conflicts with Session ${s2.id} (${s2.start}-${s2.end})`;
+          div.appendChild(conflictDiv);
+        });
+        container.appendChild(div);
+      }
+    });
+
+    if (!container.hasChildNodes()) {
+      container.textContent = "No session time conflicts detected.";
+    }
+  </script>
+
+</body>
+</html>
