@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Rated Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      padding: 20px;
+    }
+    .event-card {
+      background: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-left: 5px solid #2196F3;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .event-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .event-rating {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Top Rated Events</h1>
+  <div id="top-rated-events"></div>
+
+  <script>
+    const events = [
+      { title: "Tech Expo", avgRating: 4.7, feedbackCount: 25 },
+      { title: "Startup Summit", avgRating: 4.9, feedbackCount: 8 },
+      { title: "Food Carnival", avgRating: 4.5, feedbackCount: 15 },
+      { title: "Book Fair", avgRating: 4.2, feedbackCount: 30 },
+      { title: "Music Fiesta", avgRating: 4.8, feedbackCount: 12 },
+      { title: "Art Exhibition", avgRating: 3.9, feedbackCount: 20 },
+    ];
+
+    // Filter and sort events
+    const topRatedEvents = events
+      .filter(event => event.feedbackCount >= 10)
+      .sort((a, b) => b.avgRating - a.avgRating);
+
+    const container = document.getElementById("top-rated-events");
+
+    if (topRatedEvents.length === 0) {
+      container.innerHTML = "<p>No events meet the rating criteria.</p>";
+    } else {
+      topRatedEvents.forEach(event => {
+        const card = document.createElement("div");
+        card.className = "event-card";
+        card.innerHTML = `
+          <div class="event-title">${event.title}</div>
+          <div class="event-rating">⭐ Rating: ${event.avgRating} (${event.feedbackCount} reviews)</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+
+</body>
+</html>
