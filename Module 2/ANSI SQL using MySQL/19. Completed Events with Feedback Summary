@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Completed Events Feedback Summary</title>
+<style>body{font-family:Arial,sans-serif;padding:20px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ccc;padding:8px;text-align:left;} th{background:#1976d2;color:#fff;}</style>
+</head>
+<body>
+
+<h2>Completed Events - Registrations & Average Feedback</h2>
+<table>
+<thead>
+<tr><th>Event</th><th>Total Registrations</th><th>Average Rating</th></tr>
+</thead>
+<tbody id="summary-body"></tbody>
+</table>
+
+<script>
+const events = [
+  { id: 1, name: "Tech Expo", status: "completed" },
+  { id: 2, name: "Startup Summit", status: "upcoming" },
+  { id: 3, name: "Food Carnival", status: "completed" }
+];
+
+const registrations = [
+  { userId: 1, eventId: 1 },
+  { userId: 2, eventId: 1 },
+  { userId: 3, eventId: 3 },
+  { userId: 4, eventId: 3 },
+  { userId: 5, eventId: 3 }
+];
+
+const feedbacks = [
+  { eventId: 1, rating: 4 },
+  { eventId: 1, rating: 5 },
+  { eventId: 3, rating: 3 },
+  { eventId: 3, rating: 4 },
+  { eventId: 3, rating: 4 }
+];
+
+const tbody = document.getElementById('summary-body');
+
+events.filter(e => e.status === 'completed').forEach(event => {
+  const totalRegs = registrations.filter(r => r.eventId === event.id).length;
+  const eventFeedbacks = feedbacks.filter(f => f.eventId === event.id);
+  const avgRating = eventFeedbacks.length
+    ? (eventFeedbacks.reduce((sum,f) => sum + f.rating, 0) / eventFeedbacks.length).toFixed(2)
+    : "N/A";
+  
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td>${event.name}</td><td>${totalRegs}</td><td>${avgRating}</td>`;
+  tbody.appendChild(tr);
+});
+</script>
+
+</body>
+</html>
