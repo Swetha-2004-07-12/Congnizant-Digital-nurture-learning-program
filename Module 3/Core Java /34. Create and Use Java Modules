@@ -1,0 +1,19 @@
+com.utils/
+  src/
+    module-info.java
+    com/utils/Utils.java
+
+com.greetings/
+  src/
+    module-info.java
+    com/greetings/Main.java
+module com.utils {
+    exports com.utils;
+}
+package com.utils;
+
+public class Utils {
+    public static void sayHello(String name) {
+        System.out.println("Hello, " + name + "!");
+    }
+}
