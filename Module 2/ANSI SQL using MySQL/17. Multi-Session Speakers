@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Multi-Session Speakers</title>
+<style>body{font-family:Arial,sans-serif;padding:20px;} ul{list-style:none;padding:0;} li{margin:6px 0;}</style>
+</head>
+<body>
+
+<h2>Speakers Handling More Than One Session</h2>
+<ul id="speakers-list"></ul>
+
+<script>
+const sessions = [
+  { id: 1, eventId: 1, speaker: "Alice" },
+  { id: 2, eventId: 1, speaker: "Bob" },
+  { id: 3, eventId: 2, speaker: "Alice" },
+  { id: 4, eventId: 3, speaker: "Charlie" },
+  { id: 5, eventId: 3, speaker: "Bob" },
+  { id: 6, eventId: 4, speaker: "Alice" }
+];
+
+// Count sessions per speaker
+const speakerCounts = {};
+sessions.forEach(s => {
+  speakerCounts[s.speaker] = (speakerCounts[s.speaker] || 0) + 1;
+});
+
+const multiSessionSpeakers = Object.entries(speakerCounts)
+  .filter(([_, count]) => count > 1)
+  .map(([speaker, count]) => `${speaker} (${count} sessions)`);
+
+const ul = document.getElementById('speakers-list');
+if(multiSessionSpeakers.length === 0){
+  ul.innerHTML = '<li>No speakers with multiple sessions found.</li>';
+} else {
+  multiSessionSpeakers.forEach(speaker => {
+    const li = document.createElement('li');
+    li.textContent = speaker;
+    ul.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>
